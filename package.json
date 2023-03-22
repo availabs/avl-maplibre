@@ -1,0 +1,67 @@
+{
+  "name": "@availabs/avl-map",
+  "version": "1.0.8",
+  "description": "AVAILabs map library, using mapbox-gl",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "node test.js",
+    "build": "npx eslint src && babel src -d dist",
+    "publish-it": "npm run build && npm publish --access public"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "dist/*",
+      ".git"
+    ],
+    "ext": "js, jsx"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/availabs/avl-map.git"
+  },
+  "keywords": [
+    "avail",
+    "availabs",
+    "avl",
+    "map"
+  ],
+  "author": "AVAILabs",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/availabs/avl-map/issues"
+  },
+  "homepage": "https://github.com/availabs/avl-map#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
+    "@babel/plugin-transform-spread": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-react": "^7.12.5",
+    "@typescript-eslint/eslint-plugin": "^4.0.0",
+    "@typescript-eslint/parser": "^4.0.0",
+    "babel-eslint": "^10.0.0",
+    "eslint": "^7.5.0",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-plugin-flowtype": "^5.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jest": "^24.0.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-react-hooks": "^4.0.8",
+    "eslint-plugin-testing-library": "^3.9.0",
+    "worker-loader": "^3.0.8"
+  },
+  "peerDependencies": {
+    "react": "16.x || 17.x",
+    "react-dom": "16.x || 17.x",
+    "react-redux": "7.x",
+    "styled-components": "5.x",
+    "tailwindcss": "2.x"
+  },
+  "dependencies": {
+    "@availabs/avl-components": "^1.0.38",
+    "mapbox-gl": "^2.1.1"
+  }
+}
