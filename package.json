@@ -61,7 +61,8 @@
     "tailwindcss": "2.x"
   },
   "dependencies": {
-    "@availabs/avl-components": "^1.0.38",
-    "mapbox-gl": "^2.1.1"
+    "mapbox-gl": "^2.1.1",
+    "maplibre-gl2": "npm:maplibre-gl@^2.4.0"
+    
   }
 }
