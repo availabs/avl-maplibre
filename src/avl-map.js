@@ -5,6 +5,7 @@ import mapboxgl from 'maplibre-gl2'
 
 import get from "lodash.get";
 import { useSetSize } from './components/utils'
+import isEqual from 'lodash/isEqual'
 
 // import { useSetSize, useFalcor } from "modules/avl-components/src";
 // import {  } from 'modules/avl-components/src'
@@ -432,7 +433,6 @@ const AvlMap = (props) => {
     (layer, update) => {
       if (!get(layer, "legend", null)) return;
 
-      // console.log("update Legend", layer.legend, update);
       layer.legend = {
         ...layer.legend,
         ...update,
@@ -569,6 +569,7 @@ const AvlMap = (props) => {
       state.activeLayers.forEach((layer) => {
         layer._onRemove(state.map);
       });
+      console.log('setStyle')
       state.map.setStyle(state.mapStyles[styleIndex].style);
       dispatch({
         type: "set-map-style",
@@ -633,7 +634,7 @@ const AvlMap = (props) => {
 
     const mapStyles = styles.map((style) => ({
       ...style,
-      imageUrl: getStaticImageUrl(style.style, { center: Options.center }),
+      //imageUrl: getStaticImageUrl(style.style, { center: Options.center }),
     }));
     let styleIndex = 0;
 
@@ -645,7 +646,7 @@ const AvlMap = (props) => {
         mapStyles.unshift({
           name: "Unspecified Style",
           style,
-          imageUrl: getStaticImageUrl(style, Options),
+          //imageUrl: getStaticImageUrl(style, Options),
         });
       } else {
         styleIndex = index;
@@ -833,10 +834,9 @@ const AvlMap = (props) => {
 
       const props = get(layerProps, layer.id, null),
         prevProps = get(state.prevLayerProps, layer.id, null);
-
-      if (props !== prevProps) {
+  
+      if (!isEqual(props,prevProps)) {
         needsFetch.push(layer);
-        return;
       }
 
       const layerState = get(state.layerStates, layer.id, null),
@@ -864,14 +864,8 @@ const AvlMap = (props) => {
     }
 
   }, [
-    state.activeLayers,
     layerProps,
-    state.prevLayerProps,
-    state.layerStates,
-    state.prevLayerStates,
-    state.map,
-    falcor,
-    fetchData,
+    state.layerStates
   ]);
 
   const ref = React.useRef(null),
