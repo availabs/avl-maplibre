@@ -8,6 +8,7 @@ const InfoBoxContainer = ({
   width = 320,
   padding = 8,
   MapActions,
+  layerStates,
   ...props
 }) => {
   const [  infoBoxLayers, infoBoxWidth] = React.useMemo(() => activeLayers.reduce(
@@ -30,13 +31,15 @@ const InfoBoxContainer = ({
       return a;
     },
     [[], [], width]
-  ), [activeLayers, width]);
+  ), [activeLayers, width, layerStates]);
+
+  //console.log('infoboxes', infoBoxLayers)
 
   return (
     <div
       className={`
-        flex flex-col items-end z-30
-        pointer-events-none
+        absolute right-0 top-0 bottom-0 flex flex-col items-end z-30
+        pointer-events-none 
       `}
       style={{ padding: `${padding}px` }}
     >
