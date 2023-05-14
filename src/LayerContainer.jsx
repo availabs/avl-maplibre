@@ -3,7 +3,7 @@ import mapboxgl from 'maplibre-gl2'
 
 import DefaultHoverComp from "./components/DefaultHoverComp"
 
-import get from "lodash.get"
+import get from "lodash/get"
 
 import {hasValue} from './components/utils'
 
