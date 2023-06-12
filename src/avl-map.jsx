@@ -624,9 +624,9 @@ const AvlMap = (props) => {
 
   // LOAD MAPBOX GL MAP
   React.useEffect(() => {
-    if (!accessToken) return;
+    // if (!accessToken) return;
 
-    mapboxgl.accessToken = accessToken;
+    // mapboxgl.accessToken = accessToken;
 
     const regex = /^mapbox:\/\/styles\//;
 
@@ -799,15 +799,15 @@ const AvlMap = (props) => {
   ]);
 
   // SEND PROPS TO ACTIVE LAYERS
-  // React.useEffect(() => {
-  //   state.activeLayers.forEach((layer) => {
-  //     const props = get(layerProps, layer.id, {}),
-  //       prevProps = get(state.prevLayerProps, layer.id, {});
-  //     if (props) {
-  //       layer.receiveProps(props, state.map, falcor, MapActions);
-  //     }
-  //   });
-  // }, [state.map, falcor, state.activeLayers, layerProps, MapActions]);
+  React.useEffect(() => {
+    state.activeLayers.forEach((layer) => {
+      const props = get(layerProps, layer.id, {}),
+        prevProps = get(state.prevLayerProps, layer.id, {});
+      if (!isEqual(Object.values(props).filter(d => typeof d !== 'function'),Object.values(prevProps).filter(d => typeof d !== 'function'))) {
+        layer.receiveProps(props, prevProps, state.map, falcor);
+      }
+    });
+  }, [state.map, falcor, state.activeLayers, layerProps]);
 
   // CHECK FOR LAYER STATE UPDATE
   // React.useEffect(() => {

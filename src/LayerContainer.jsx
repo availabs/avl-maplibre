@@ -409,9 +409,9 @@ class LayerContainer {
 
   }
 
-  // receiveProps(props, mapboxMap, falcor, MapActions) {
-  //
-  // }
+  receiveProps(props, mapboxMap, falcor, MapActions) {
+    //cosnole.log('hola layer.receiveProps')
+  } 
 
   toggleVisibility(mapboxMap) {
     this.isVisible = !this.isVisible;
