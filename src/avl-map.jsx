@@ -382,7 +382,10 @@ const AvlMap = (props) => {
 
   const projectLngLat = React.useCallback(
     (lngLat) => {
-      return state.map.project(lngLat);
+      if(state.map){
+        return state.map.project(lngLat);
+      }
+      return null
     },
     [state.map]
   );
