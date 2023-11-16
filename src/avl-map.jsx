@@ -44,6 +44,7 @@ const DefaultMapOptions = {
   attributionControl: false,
   maplibreLogo: false,
   logoPosition: "bottom-left",
+  protocols: []
 };
 
 
@@ -86,6 +87,7 @@ const InitialState = {
   prevLayerStates: {},
   layerStates: {},
   prevLayerProps: {},
+  Protocols: {}
 };
 const Reducer = (state, action) => {
   const { type, ...payload } = action;
@@ -633,7 +635,16 @@ const AvlMap = (props) => {
 
     const regex = /^mapbox:\/\/styles\//;
 
-    const { style, styles, ...Options } = MapOptions.current;
+    const { style, styles, protocols = [], ...Options } = MapOptions.current;
+
+    const Protocols = protocols.reduce((a, c) => {
+      const { type, protocolInit, ...rest } = c;
+      a[type] = {
+        ...rest,
+        Protocol: protocolInit(mapboxgl)
+      }
+      return a;
+    }, {});
 
     const mapStyles = styles.map((style) => ({
       ...style,
@@ -658,7 +669,6 @@ const AvlMap = (props) => {
 
     const map = new mapboxgl.Map({
       container: id.current,
-      logoControl: false,
       ...Options,
       style: mapStyles[styleIndex].style,
     });
@@ -672,7 +682,7 @@ const AvlMap = (props) => {
     });
 
     map.once("load", (e) => {
-      dispatch({ type: "map-loaded", map, mapStyles, styleIndex });
+      dispatch({ type: "map-loaded", map, mapStyles, styleIndex,Protocols });
     });
 
     return () => map.remove();
