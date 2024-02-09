@@ -1,5 +1,5 @@
 //import mapboxgl from "mapbox-gl";
-import mapboxgl from 'maplibre-gl2'
+import mapboxgl from 'maplibre-gl'
 
 import DefaultHoverComp from "./components/DefaultHoverComp"
 
